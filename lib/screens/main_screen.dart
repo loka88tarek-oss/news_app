@@ -31,6 +31,7 @@ class MainScreen extends StatelessWidget {
                 ? HomeView()
                 : NewsDetailsView(),
           );
+
         },
       ),
     );
