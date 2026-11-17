@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/common/extensions/context_extension.dart';
 import 'package:news_app/enums/category_enum.dart';
-import 'package:news_app/models/news_model.dart';
+
 import 'package:news_app/screens/network/network_services.dart';
 import 'package:news_app/screens/provider/main_screen_provider.dart';
+import 'package:news_app/screens/widgets/article_body.dart';
 import 'package:news_app/screens/widgets/news_card_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -19,10 +20,9 @@ class _NewsDetailsViewState extends State<NewsDetailsView> {
   @override
   void initState() {
     super.initState();
- WidgetsBinding.instance.addPostFrameCallback((_) {
-   Provider.of<MainScreenProvider>(context, listen: false).getSources();
-  });
-    
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<MainScreenProvider>(context, listen: false).getSources();
+    });
   }
 
   @override
@@ -31,13 +31,13 @@ class _NewsDetailsViewState extends State<NewsDetailsView> {
       builder:
           (BuildContext context, MainScreenProvider provider, Widget? child) {
             if (provider.isSourcesLoading) {
-              return Center(child: CircularProgressIndicator());
+              return Center(child: CircularProgressIndicator(color: context.theme.colorScheme.secondary,));
             }
             if ((provider.sources ?? []).isNotEmpty) {
               return DefaultTabController(
                 length: provider.sources!.length,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     spacing: 15.h,
                     children: [
@@ -61,7 +61,7 @@ class _NewsDetailsViewState extends State<NewsDetailsView> {
                         child: TabBarView(
                           children: List.generate(
                             provider.sources!.length,
-                            (index) => _buildTabView([]),
+                            (index) => ArticleBody(sourceId: provider.sources![index].id??''),
                           ),
                         ),
                       ),
@@ -85,19 +85,5 @@ class _NewsDetailsViewState extends State<NewsDetailsView> {
     );
   }
 
-  _buildTabView(List<NewsModel> list) {
-    return ListView.separated(
-      itemBuilder: (context, index) => NewsCardWidget(
-        newsModel: NewsModel(
-          id: list[index].id,
-          authorizedAt: list[index].authorizedAt,
-          authorizedBy: list[index].authorizedBy,
-          image: list[index].image,
-          title: list[index].title,
-        ),
-      ),
-      separatorBuilder: (context, index) => SizedBox(height: 24.h),
-      itemCount: list.length,
-    );
-  }
+  
 }

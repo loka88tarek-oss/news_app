@@ -21,12 +21,12 @@ enum CategoryEnum {
         return Assets.images.entertainment.path;
       case CategoryEnum.health:
         return Assets.images.health.path;
-        
+
       case CategoryEnum.science:
         return Assets.images.science.path;
       case CategoryEnum.sport:
         return Assets.images.sport.path;
-        
+
       case CategoryEnum.technology:
         return Assets.images.technology.path;
     }

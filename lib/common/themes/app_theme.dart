@@ -11,7 +11,6 @@ class AppTheme {
     ),
     scaffoldBackgroundColor: AppColors.primaryWhiteColor,
     appBarTheme: AppBarTheme(
-      
       iconTheme: IconThemeData(color: AppColors.primaryBlackColor),
       titleTextStyle: AppTextStyles.styleS20W500White,
       backgroundColor: AppColors.primaryWhiteColor,

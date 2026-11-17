@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:news_app/common/themes/app_colors.dart';
 
 class AppTextStyles {
-
   static TextStyle get styleS14W400White =>
       _styleS14W400(AppColors.primaryBlackColor);
   static TextStyle get styleS16W400White =>

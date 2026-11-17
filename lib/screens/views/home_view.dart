@@ -10,21 +10,20 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-        padding: EdgeInsets.all(16.r),
-        children: [
-          Text(
-            "Good Morning\nHere is Some News For You",
-            style: context.textTheme.titleLarge,
+      padding: EdgeInsets.all(16.r),
+      children: [
+        Text(
+          "Good Morning\nHere is Some News For You",
+          style: context.textTheme.titleLarge,
+        ),
+        ...List.generate(
+          CategoryEnum.values.length,
+          (index) => CategoryCardWidget(
+            categoryEnum: CategoryEnum.values[index],
+            isEven: index % 2 == 0,
           ),
-          ...List.generate(
-            CategoryEnum.values.length,
-            (index) => CategoryCardWidget(
-              categoryEnum: CategoryEnum.values[index],
-              isEven: index % 2 == 0,
-            ),
-          ),
-        ],
-      )
-   ;
+        ),
+      ],
+    );
   }
 }

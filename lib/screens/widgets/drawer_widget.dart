@@ -22,11 +22,17 @@ class DrawerWidget extends StatelessWidget {
             width: 270.w,
             height: 166.h,
             color: AppColors.primaryWhiteColor,
-            child: Text("News App", style: AppTextStyles.styleS24W700White),//TODO localization
+            child: Text(
+              "News App",
+              style: AppTextStyles.styleS24W700White,
+            ), //TODO localization
           ),
           ListTile(
             onTap: () {
-              Provider.of<MainScreenProvider>(context,listen: false).changeCategory(null);
+              Provider.of<MainScreenProvider>(
+                context,
+                listen: false,
+              ).changeCategory(null);
               Navigator.of(context).pop();
             },
             title: Text("Go To Home", style: AppTextStyles.styleS20W700Black),
