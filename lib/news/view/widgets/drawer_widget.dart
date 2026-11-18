@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/common/app_text_styles.dart';
 import 'package:news_app/common/themes/app_colors.dart';
 import 'package:news_app/common/widgets/cutome_drop_down_menue_widget.dart';
-import 'package:news_app/screens/provider/main_screen_provider.dart';
+import 'package:news_app/news/view_model/provider/main_screen_provider.dart';
 import 'package:provider/provider.dart';
 
 class DrawerWidget extends StatelessWidget {

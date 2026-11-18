@@ -1,14 +1,16 @@
-import 'dart:math';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/common/error/error_model.dart';
-import 'package:news_app/common/extensions/context_extension.dart';
-import 'package:news_app/models/article_response_model/article.dart';
 
-import 'package:news_app/screens/network/network_services.dart';
-import 'package:news_app/screens/widgets/custome_error_widget.dart';
-import 'package:news_app/screens/widgets/news_card_widget.dart';
+import 'package:news_app/common/extensions/context_extension.dart';
+import 'package:news_app/news/model/data_models/article_response_model/article.dart';
+
+import 'package:news_app/news/view/widgets/custome_error_widget.dart';
+import 'package:news_app/news/view/widgets/news_card_widget.dart';
+import 'package:news_app/news/view_model/provider/main_screen_provider.dart';
+import 'package:provider/provider.dart';
+
 
 class ArticleBody extends StatefulWidget {
   final String sourceId;
@@ -19,12 +21,18 @@ class ArticleBody extends StatefulWidget {
 }
 
 class _ArticleBodyState extends State<ArticleBody> {
+    @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<MainScreenProvider>(context, listen: false).getArticle(widget.sourceId);
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: NetworkServices.getArticle(widget.sourceId),
-      builder: (context, asyncSnapshot) {
-        if (asyncSnapshot.connectionState == ConnectionState.waiting) {
+
+  MainScreenProvider provider=        context.watch<MainScreenProvider>();
+        if (provider.isArticleLoading) {
           return Center(
             child: CircularProgressIndicator(
               color: context.theme.colorScheme.secondary,
@@ -32,17 +40,16 @@ class _ArticleBodyState extends State<ArticleBody> {
           );
         }
 
-        (ErrorModel?, List<Article>?) response = asyncSnapshot.data!;
-        if (response.$1 != null) {
+        if (provider.articleErrorMEssage != null) {
           return CustomeErrorWidget(
-            errorMessage: response.$1!.message,
+            errorMessage: provider.articleErrorMEssage!,
             onRefresh: () {
               setState(() {});
             },
           );
         }
 
-        List<Article>? article = response.$2 ?? [];
+        List<Article>? article = provider.article?? [];
         return ListView.separated(
           padding: EdgeInsets.all(5.r),
           itemBuilder: (context, index) =>
@@ -51,7 +58,7 @@ class _ArticleBodyState extends State<ArticleBody> {
           separatorBuilder: (context, index) => SizedBox(height: 24.h),
           itemCount: article.length,
         );
-      },
-    );
+      
   }
+
 }

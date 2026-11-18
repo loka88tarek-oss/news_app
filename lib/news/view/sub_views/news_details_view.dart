@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/common/extensions/context_extension.dart';
-import 'package:news_app/enums/category_enum.dart';
 
-import 'package:news_app/screens/network/network_services.dart';
-import 'package:news_app/screens/provider/main_screen_provider.dart';
-import 'package:news_app/screens/widgets/article_body.dart';
-import 'package:news_app/screens/widgets/custome_error_widget.dart';
-import 'package:news_app/screens/widgets/news_card_widget.dart';
+import 'package:news_app/news/view/widgets/article_body.dart';
+import 'package:news_app/news/view/widgets/custome_error_widget.dart';
+
+
+import 'package:news_app/news/view_model/provider/main_screen_provider.dart';
+
 import 'package:provider/provider.dart';
 
 class NewsDetailsView extends StatefulWidget {

@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:news_app/common/app_consts.dart';
 import 'package:news_app/common/error/error_model.dart';
-import 'package:news_app/models/article_response_model/article.dart';
-import 'package:news_app/models/article_response_model/article_response_model.dart';
-import 'package:news_app/models/source_model.dart';
-import 'package:news_app/screens/network/endpoints.dart';
+import 'package:news_app/news/model/data_models/article_response_model/article.dart';
+import 'package:news_app/news/model/data_models/article_response_model/article_response_model.dart';
+import 'package:news_app/news/model/data_models/source_model.dart';
+import 'package:news_app/common/network/endpoints.dart';
 
 class NetworkServices {
   static Dio dio = Dio(

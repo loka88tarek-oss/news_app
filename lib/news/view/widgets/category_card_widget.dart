@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/common/app_text_styles.dart';
 import 'package:news_app/common/extensions/context_extension.dart';
 import 'package:news_app/common/extensions/widget_extension.dart';
-import 'package:news_app/enums/category_enum.dart';
-import 'package:news_app/screens/provider/main_screen_provider.dart';
+import 'package:news_app/common/enums/category_enum.dart';
+import 'package:news_app/news/view_model/provider/main_screen_provider.dart';
 import 'package:provider/provider.dart';
 
 class CategoryCardWidget extends StatelessWidget {

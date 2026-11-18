@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/common/app_text_styles.dart';
 import 'package:news_app/common/extensions/context_extension.dart';
-import 'package:news_app/enums/category_enum.dart';
-import 'package:news_app/screens/provider/main_screen_provider.dart';
-import 'package:news_app/screens/views/home_view.dart';
-import 'package:news_app/screens/views/news_details_view.dart';
-import 'package:news_app/screens/widgets/category_card_widget.dart';
-import 'package:news_app/screens/widgets/drawer_widget.dart';
+import 'package:news_app/common/enums/category_enum.dart';
+import 'package:news_app/news/view/sub_views/home_view.dart';
+import 'package:news_app/news/view/sub_views/news_details_view.dart';
+import 'package:news_app/news/view/widgets/drawer_widget.dart';
+import 'package:news_app/news/view_model/provider/main_screen_provider.dart';
+
+
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatelessWidget {
