@@ -6,6 +6,7 @@ import 'package:news_app/enums/category_enum.dart';
 import 'package:news_app/screens/network/network_services.dart';
 import 'package:news_app/screens/provider/main_screen_provider.dart';
 import 'package:news_app/screens/widgets/article_body.dart';
+import 'package:news_app/screens/widgets/custome_error_widget.dart';
 import 'package:news_app/screens/widgets/news_card_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,24 @@ class _NewsDetailsViewState extends State<NewsDetailsView> {
       builder:
           (BuildContext context, MainScreenProvider provider, Widget? child) {
             if (provider.isSourcesLoading) {
-              return Center(child: CircularProgressIndicator(color: context.theme.colorScheme.secondary,));
+              return Center(
+                child: CircularProgressIndicator(
+                  color: context.theme.colorScheme.secondary,
+                ),
+              );
+            }
+            if (provider.sourceErrorMEssage != null) {
+              return Center(
+                child: CustomeErrorWidget(
+                  errorMessage: provider.sourceErrorMEssage!,
+                  onRefresh: () {
+                    Provider.of<MainScreenProvider>(
+                      context,
+                      listen: false,
+                    ).getSources();
+                  },
+                ),
+              );
             }
             if ((provider.sources ?? []).isNotEmpty) {
               return DefaultTabController(
@@ -61,7 +79,9 @@ class _NewsDetailsViewState extends State<NewsDetailsView> {
                         child: TabBarView(
                           children: List.generate(
                             provider.sources!.length,
-                            (index) => ArticleBody(sourceId: provider.sources![index].id??''),
+                            (index) => ArticleBody(
+                              sourceId: provider.sources![index].id ?? '',
+                            ),
                           ),
                         ),
                       ),
@@ -84,6 +104,4 @@ class _NewsDetailsViewState extends State<NewsDetailsView> {
           },
     );
   }
-
-  
 }
